@@ -1,16 +1,11 @@
 import pandas as pd
 import numpy as np
 
-csv_file = "./data/Food_Inspections_after_openrefine.csv"
-df = pd.read_csv(csv_file)
-
-print(df.head())
-
 def check_result(result_column, column_name, violation_str):
-	if result_column:
-		print(column_name + " contains " + violation_str + ":")
-		for entry in result_column:
-			print(entry)
+	if len(result_column):
+		print(column_name + " contains " + violation_str + ": " + str(len(result_column)))
+		# for entry in result_column:
+		# 	print(entry)
 	else:
 		print('No ' + violation_str + ' on column ' + column_name)
 
@@ -22,7 +17,7 @@ def check_leading_trailing_whitespace(df, column_name):
         entries_with_whitespace = column[has_whitespace]
         return entries_with_whitespace.tolist()
     else:
-        return False
+        return []
 
 # Function to check if each entry is a number (int or float) in the column
 def check_numeric_column(df, column_name):
@@ -36,16 +31,24 @@ def check_numeric_column(df, column_name):
 
 # Function to check if each entry has at least one lowercase character in the column
 def check_any_lowercase(df, column_name):
-    return df[column_name].str.contains(r'[a-z]').all()
+    # return df[column_name].str.contains(r'[a-z]').all()
+	return df[column_name][df[column_name].str.contains(r'[a-z]', na=False)]
 
-for col in ['Address', 'Violations']:
-	result_column = check_leading_trailing_whitespace(df, col)
-	check_result(result_column, col, "leading/trailing whitespace")
-        
-for col in ['Inspection ID', 'License #', 'Zip', 'Latitude', 'Longitude']:
-	result_column = check_numeric_column(df, col)
-	check_result(result_column, col, "non-numeric type")
+# Function to check for outliers using z-scores
+def check_outliers(df, column_name, threshold=4.1):
+    z_scores = (df[column_name] - df[column_name].mean()) / df[column_name].std()
+    outlier_indices = z_scores.abs() > threshold
+    return df[column_name][outlier_indices].tolist()
 
-for col in ['DBA Name', 'AKA Name', 'Address', 'City', 'Violations']:
-	result_column = check_any_lowercase(df, col)
-	check_result(result_column, col, "lowercase characters")
+def check_duplicate(df, column_name):
+	return df[df.duplicated(column_name, keep=False)]
+
+def check_categories(df, column_name):
+	col_dict = {}
+	for rec in df[column_name]:
+		if rec not in col_dict:
+			col_dict[rec] = 1
+		else:
+			col_dict[rec] += 1
+	
+	return col_dict
