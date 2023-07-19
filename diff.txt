@@ -1,0 +1,111 @@
+CSV Raw data Head:
+   Inspection ID  ...                                  Location
+0        2079132  ...  (41.853650885040594, -87.62053358114167)
+1        2079129  ...   (41.88157249576794, -87.65305233593274)
+2        2079125  ...   (41.88657652150854, -87.66532812140231)
+3        2079123  ...  (41.853650885040594, -87.62053358114167)
+4        2079105  ...   (41.921675488910864, -87.7767113569357)
+
+[5 rows x 17 columns]
+
+
+Before and After Comparison:
+
+raw CSV without cleaning:
+Address contains leading/trailing whitespace: 153366
+CSV after cleaning:
+No leading/trailing whitespace on column Address
+raw CSV without cleaning:
+Violations contains leading/trailing whitespace: 7745
+CSV after cleaning:
+No leading/trailing whitespace on column Violations
+raw CSV without cleaning:
+No non-numeric type on column Inspection ID
+CSV after cleaning:
+No non-numeric type on column Inspection ID
+
+
+raw CSV without cleaning:
+No non-numeric type on column License #
+CSV after cleaning:
+No non-numeric type on column License #
+
+
+raw CSV without cleaning:
+No non-numeric type on column Zip
+CSV after cleaning:
+No non-numeric type on column Zip
+
+
+raw CSV without cleaning:
+No non-numeric type on column Latitude
+CSV after cleaning:
+No non-numeric type on column Latitude
+
+
+raw CSV without cleaning:
+No non-numeric type on column Longitude
+CSV after cleaning:
+No non-numeric type on column Longitude
+
+
+raw CSV without cleaning:
+DBA Name contains lowercase characters: 10443
+CSV after cleaning:
+No lowercase characters on column DBA Name
+
+
+raw CSV without cleaning:
+AKA Name contains lowercase characters: 9585
+CSV after cleaning:
+No lowercase characters on column AKA Name
+
+
+raw CSV without cleaning:
+Address contains lowercase characters: 9488
+CSV after cleaning:
+No lowercase characters on column Address
+
+
+raw CSV without cleaning:
+City contains lowercase characters: 348
+CSV after cleaning:
+No lowercase characters on column City
+
+
+raw CSV without cleaning:
+Violations contains lowercase characters: 123012
+CSV after cleaning:
+No lowercase characters on column Violations
+
+
+raw CSV without cleaning:
+No Outliers on column Latitude
+CSV after cleaning:
+No Outliers on column Latitude
+
+
+raw CSV without cleaning:
+No Outliers on column Longitude
+CSV after cleaning:
+No Outliers on column Longitude
+
+
+raw CSV without cleaning:
+No Inspection ID on column Inspection ID
+CSV after cleaning:
+No Inspection ID on column Inspection ID
+
+
+raw CSV without cleaning:
+{'Pass': 90506, 'Not Ready': 818, 'Fail': 29845, 'Out of Business': 13794, 'No Entry': 4257, 'Pass w/ Conditions': 14530, 'Business Not Located': 60}
+CSV after cleaning:
+{1: 90506, 2: 818, 3: 29845, 4: 13794, 5: 4257, 6: 14530, 7: 60}
+
+
+raw CSV without cleaning:
+{'Risk 1 (High)': 107351, 'Risk 2 (Medium)': 31845, 'Risk 3 (Low)': 14529, 'All': 19, nan: 66}
+CSV after cleaning:
+{1: 107351, 2: 31845, 3: 14529, 4: 19, 5: 66}
+
+
